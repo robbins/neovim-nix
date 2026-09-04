@@ -1,4 +1,3 @@
 {
-  # Import all your configuration modules here
-  imports = [ ./bufferline.nix ];
+  imports = builtins.map (n: ./. + "/${n}") (builtins.filter (name: name != "default.nix") (builtins.attrNames (builtins.readDir ./.)));
 }
