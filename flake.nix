@@ -30,7 +30,7 @@
         in
         {
           checks.default = cfg.config.build.test;
-          formatter.default = pkgs.nixfmt;
+          formatter = pkgs.nixfmt-tree;
           packages.default = cfg.config.build.package;
         };
     };
