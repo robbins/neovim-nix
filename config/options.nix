@@ -6,4 +6,8 @@
     relativenumber = true;
     signcolumn = "yes";
   };
+  globals = {
+    mapleader = " ";
+    maplocalleader = "\\";
+  };
 }
