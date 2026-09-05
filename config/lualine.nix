@@ -58,6 +58,24 @@
           }
         ];
       };
+      tabline = {
+        lualine_a = [
+          {
+            __unkeyed-1 = "buffers";
+            mode = 4;
+            icons_enabled = false;
+            buffers_color = {
+              active = "lualine_a_inactive";
+            };
+            max_length.__raw = "vim.o.columns * 0.95";
+            show_modified_status = false;
+            separator.right = "";
+          }
+        ];
+        lualine_z = [
+          "tabs"
+        ];
+      };
     };
   };
 }
