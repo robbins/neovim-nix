@@ -27,11 +27,14 @@
             extraSpecialArgs = {
             };
           };
+          plugins = cfg.config.plugins;
         in
         {
           checks.default = cfg.config.build.test;
           formatter = pkgs.nixfmt-tree;
-          packages.default = cfg.config.build.package;
+          packages = {
+            default = cfg.config.build.package;
+          } // builtins.mapAttrs (name: plugin: plugin.package) plugins;
         };
     };
 }
