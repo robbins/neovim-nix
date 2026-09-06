@@ -8,9 +8,18 @@
       __unkeyed_profile = lib.mkForce "ivy";
     };
     keymaps = {
-      "<leader>fg" = "live_grep_native";
-      "<leader>ff" = "files";
-      "<leader>fb" = "buffers";
+      "<leader>fg" = {
+        action = "live_grep_native";
+        options.desc = "Fzf Live Grep";
+      };
+      "<leader>ff" = {
+        action = "files";
+        options.desc = "Fzf Find Files";
+      };
+      "<leader>fb" = {
+        action = "buffers";
+        options.desc = "Fzf Find Buffer";
+      };
     };
   };
 }
