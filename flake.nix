@@ -16,10 +16,14 @@
         "aarch64-darwin"
       ];
 
+      transposition.nixvimConfigurations = {
+        adHoc = true;
+      };
+
       perSystem =
         { pkgs, system, ... }:
         let
-          cfg = nixvim.lib.evalNixvim {
+          base = nixvim.lib.evalNixvim {
             inherit system;
 
             modules = [ ./config ];
@@ -27,14 +31,15 @@
             extraSpecialArgs = {
             };
           };
-          plugins = cfg.config.plugins;
+          plugins = base.config.plugins;
         in
         {
-          checks.default = cfg.config.build.test;
+          checks.default = base.config.build.test;
           formatter = pkgs.nixfmt-tree;
           packages = {
-            default = cfg.config.build.package;
+            default = base.config.build.package;
           } // builtins.mapAttrs (name: plugin: plugin.package) plugins;
+          nixvimConfigurations.default = base;
         };
     };
 }
