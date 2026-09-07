@@ -2,9 +2,9 @@
   description = "Nate's NixVim configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixvim.url = "github:nix-community/nixvim";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.follows = "nixvim/nixpkgs";
+    flake-parts.follows = "nixvim/flake-parts";
   };
 
   outputs =
