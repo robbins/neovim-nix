@@ -16,8 +16,13 @@
         "aarch64-darwin"
       ];
 
-      transposition.nixvimConfigurations = {
-        adHoc = true;
+      transposition = {
+        nixvimConfigurations = {
+          adHoc = true;
+        };
+        nixvimModules = {
+          adHoc = true;
+        };
       };
 
       perSystem =
@@ -32,14 +37,25 @@
             };
           };
           plugins = base.config.plugins;
+
+          c-cpp = base.extendModules {
+            modules = [
+              ./modules/lsp-clangd.nix
+            ];
+          };
         in
         {
           checks.default = base.config.build.test;
           formatter = pkgs.nixfmt-tree;
           packages = {
             default = base.config.build.package;
+            c-cpp = c-cpp.config.build.package;
           } // builtins.mapAttrs (name: plugin: plugin.package) plugins;
           nixvimConfigurations.default = base;
+          nixvimConfigurations.c-cpp = c-cpp;
+          nixvimModules = {
+            lsp-clangd = ./modules/lsp-clangd.nix;
+          };
         };
     };
 }
