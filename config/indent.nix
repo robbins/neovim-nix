@@ -14,6 +14,10 @@
           "kotlin"
           "java"
         ];
+        "2" = [
+          # neovim smartindent is horrible, and TS gives us 4
+          "python"
+        ];
       };
     in
     lib.mapAttrsToList (indent: patterns: {
